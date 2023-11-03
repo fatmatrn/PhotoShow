@@ -19,11 +19,22 @@ app.use(express.urlencoded({ extended: true })); // middleware seçeneklerini ob
 app.use(express.json());
 
 //ROUTES
-app.get('/', (req, res) => {
-  res.render('index');
+app.get('/',async (req, res) => {
+  const photos=await Photo.findAll()
+  res.render('index',{
+    photos
+  });
 });
 app.get('/about', (req, res) => {
   res.render('about');
+});
+app.get('/photos/:id',async (req, res) => {
+  //console.log(req.params.id)
+  //res.render('about');
+  const photo = await Photo.findByPk(req.params.id)
+  res.render('photo',{
+    photo
+  })
 });
 app.get('/add', (req, res) => {
   res.render('add');
