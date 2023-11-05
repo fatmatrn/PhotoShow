@@ -7,10 +7,14 @@
 				<div class="container-fluid position-relative">
 					<div class="row">						
                         <div class="col-7 col-md-4">
-                            <a href="/" class="tm-bg-black text-center tm-logo-container">
-                                <i class="fas fa-video tm-site-logo mb-3"></i>
-                                <h1 class="tm-site-name">PCAT</h1>
-                            </a>
+							<a
+							href="/"
+							style="border-radius: 50%; background-color: rgb(18, 92, 74)"
+							class="tm-bg-black text-center tm-logo-container"
+						  >
+							<i class="fas fa-video tm-site-logo mb-3"></i>
+							<h1 class="tm-site-name">PHOTO SHOW</h1>
+						  </a>
                         </div>
                         <div class="col-5 col-md-8 ml-auto mr-0">
                             <div class="tm-site-nav">
@@ -61,7 +65,7 @@
 							<!-- Share box -->
 							<div class="tm-bg-gray tm-share-box">
 								<div class="text-center">
-									<button class="btn btn-primary p-0 mb-4 tm-btn-animate tm-btn-download tm-icon-download"><span>Update Details</span></button>	
+									<a href="/photos/edit/<%= photo.id %>" class="btn btn-primary p-0 mb-4 tm-btn-animate tm-btn-download tm-icon-download"><span>Update Details</span></a>	
 								</div>	
 								<div class="text-center">
 									<button class="btn btn-danger p-0 tm-btn-animate tm-btn-download tm-icon-download"><span>Delete Photo</span></button>	
