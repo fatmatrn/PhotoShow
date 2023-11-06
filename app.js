@@ -22,7 +22,10 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true })); // middleware seçeneklerini obje içine alın
 app.use(express.json());
 app.use(fileUpload());
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method',{
+  methods:['POST','GET']
+}
+));
 
 //ROUTES
 app.get('/', async (req, res) => {
@@ -96,6 +99,34 @@ app.put('/photos/:id', async (req, res) => {
   await photo.save();
   res.redirect(`/photos/${req.params.id}`);
 });
+
+app.delete('/photos/:id', async (req,res)=>{
+  const photoId = req.params.id;
+
+  const photo = await Photo.findOne({ id: req.params.id });
+let deletedImagePath = __dirname+'/public'+photo.image
+fs.unlinkSync(deletedImagePath)
+
+
+  try {
+    const deletedPhoto = await Photo.destroy({
+      where: {
+        id: photoId
+      }
+    });
+  
+    if (deletedPhoto === 1) {
+      console.log(`ID'si ${photoId} olan fotoğraf başarıyla silindi.`);
+    } else {
+      console.log(`ID'si ${photoId} olan fotoğraf bulunamadı veya silinemedi.`);
+    }
+  } catch (error) {
+    console.error('Fotoğraf silinirken bir hata oluştu:', error);
+  }
+
+  res.redirect('/')
+
+  })
 
 const port = 3000;
 app.listen(port, () => {
