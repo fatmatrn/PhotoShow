@@ -70,6 +70,7 @@ app.post('/photos', async (req, res) => {
 
   const uploadDir = 'public/uploads';
   //Sync  olmasi once bunu yap sonra digerlerine gec anlaminda
+  //Sync  olmasi once bunu yap sonra digerlerine gec anlaminda
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
   }
