@@ -1,9 +1,16 @@
-<%- include('partials/_header') -%>
-
+<%- include('partials/_header.ejs') %>
 <body>
     <div class="tm-page-wrap mx-auto">
         <div class="position-relative">
-            <%- include('partials/_navigation') -%>
+            <div class="position-absolute tm-site-header">
+                <div class="container-fluid position-relative">
+                    <div class="row">
+
+                        <%- include('partials/_navbar.ejs') %>
+                    </div>
+
+                </div>
+            </div>
             <div class="tm-welcome-container text-center text-white">
                 <div class="tm-welcome-container-inner">
                     <p class="tm-welcome-text mb-1 text-white">Video Catalog is brought to you by TemplateMo.</p>
@@ -42,40 +49,68 @@
                             </div>        
                         </div>
                     </div>
-                    
-                        <% for(let i = 0; i<photos.length; i++) {%>
-                    
+                    <!-- Photo Catalogs -->
                     <div class="row tm-catalog-item-list">
-                        <div class="col-lg-3 col-md-3 col-sm-3 tm-catalog-item">
-                            <div class="position-relative tm-thumbnail-container">
-                                <img src="<%= photos[i].image  %>" alt="Image" class="img-fluid tm-catalog-item-img">    
-                                <a href="/photos/<%= photos[i].id%>" class="position-absolute tm-img-overlay">
-                                    <i class="fas fa-play tm-overlay-icon"></i>
-                                </a>
-                            </div>    
-                            <div class="p-4 tm-bg-gray tm-catalog-item-description">
-                                <h3 class="tm-text-primary mb-3 tm-catalog-item-title"><%= photos[i].title  %></h3>
-                                <p class="tm-catalog-item-text"><span class="tm-text-secondary"><%= photos[i].description  %></p>
-                            </div>
-                        </div>
-                        <% } %>
+            
+                        
+                            <% photos.forEach(element => { %>
+                                <div class="col-lg-4 col-md-6 col-sm-12 tm-catalog-item">
+                                    <div class="position-relative tm-thumbnail-container">
+                                        <img width="300px" height="100px" src="<%= element.image %> " alt="Image" class="img-fluid tm-catalog-item-img">    
+                                        <a href="/photo/<%= element._id %> " class="position-absolute tm-img-overlay">
+                                            <i class="fas fa-play tm-overlay-icon"></i>
+                                        </a>
+                                    </div>    
+                                    <div class="p-4 tm-bg-gray tm-catalog-item-description">
+                                        <h3 class="tm-text-primary mb-3 tm-catalog-item-title"> <%= element.title %>  </h3>
+                                        <p class="tm-catalog-item-text"> <%= element.description %>   </p>
+                                    </div>
+                                </div>
+                            <% }) %>
+                            
+                        
+                           
                        
+                        
+            
                     </div>
 
                     <!-- Catalog Paging Buttons -->
-                    <div >
-                        <ul class="nav tm-paging-links">
-                            <li class="nav-item active"><a href="#" class="nav-link tm-paging-link">1</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">2</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">3</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">4</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link tm-paging-link">></a></li>
-                        </ul>
-                    </div>
+                    <div>
+                        <% if (pages > 0) { %>
+                          <ul class="nav tm-paging-links">
+                            <% for (i=1; i <=pages; i++) { %>
+                              <%   if (i == current) { %>
+                                <li class="nav-item active"><a href="/?page=<%= i %>" class="nav-link tm-paging-link"><%= i %></a></li>
+                              <% } else if (i < pages) { %>
+                                <li class="nav-item"><a href="/?page=<%= i %>" class="nav-link tm-paging-link"><%= i %></a></li>
+                              <%  } else { %>
+                                <li class="nav-item"><a href="/?page=<%= i %>" class="nav-link tm-paging-link">></a></li>
+                              <%  } %>
+                            <%  } %>
+                          </ul>
+                        <% } %>
+                       </div>
                 </main>
 
-              <%- include('partials/_footer') -%>
-           
+                <!-- Subscribe form and footer links -->
+                <%- include ('partials/_footer.ejs') %> 
+                <!-- row -->
+
+                <footer class="row pt-5">
+                    <div class="col-12">
+                        <p class="text-right">Copyright 2020 The Video Catalog Company 
+                        
+                        - Designed by <a href="https://templatemo.com" rel="nofollow" target="_parent">TemplateMo</a></p>
+                    </div>
+                </footer>
+            </div> <!-- tm-content-container -->
+        </div>
+
+    </div> <!-- .tm-page-wrap -->
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script>
         function setVideoSize() {
             const vidWidth = 1920;
