@@ -14,9 +14,10 @@ const sequelize = new Sequelize('pcat-test-db', 'db_user', 'db_password', {
 
 const app = express();
 
-//TEMPLATE ENGINE
+//TEMPLATE ENGINE   
 app.set('view engine', 'ejs');
 
+//MIDDLEWARE
 //MIDDLEWARE
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true })); // middleware seçeneklerini obje içine alın
