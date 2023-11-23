@@ -47,6 +47,7 @@ const totalPhotos = photos1.length;
     // }
     // encType="multipart/form-data"   forma gorsel eklemeye yariyor. form tag ina konuyor
     //__dirname:var olan klasorun kendisi
+    //__dirname:var olan klasorun kendisi
   
     const uploadDir = 'public/uploads';
     //Sync  olmasi once bunu yap sonra digerlerine gec anlaminda
